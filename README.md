@@ -4,9 +4,55 @@ Smart contracts for mobile quickdraw matches and USDC payouts on Monad.
 
 Shooty is designed for players using a BLE pistol or an on-screen controller. The game server handles inputs, scoring, and match results. The `ShootyArena` contract holds player deposits, verifies referee authorizations, and allocates prizes, fees, and refunds.
 
-**The smart contract is deployed and source-verified on Monad Testnet.** This repository contains the contract implementation, tests, integration helpers, deployment tooling, and the original game blueprint. The connected frontend, multiplayer server, BLE integration, and automated relayer remain to be implemented.
+**The smart contract is deployed and source-verified on Monad Testnet.** The repository also contains the landscape web game, Python multiplayer/vision server, browser-wallet integration, and a local referee/relayer worker. Live wallet/browser validation is separate from local tests; this is a hackathon testnet prototype.
 
 [View contract](https://testnet.monadscan.com/address/0xb2877AcE468df80B6e137776d0A60D7ec4431BaF) · [Contract documentation](contracts/README.md) · [Integration guide](contracts/INTEGRATION.md)
+
+## Run the game
+
+Use Node.js 24+ and Python 3.14 (the pinned vision packages are tested on that version).
+From the repository root:
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+npm ci --ignore-scripts --no-audit --no-fund
+npm run build:wallet
+cd contracts
+npm ci --ignore-scripts --no-audit --no-fund
+cd ..
+.venv/bin/python gun_service.py --web-only --host 127.0.0.1 --chain
+```
+
+Place the authorized relayer/referee signing backup in a local `.env` or provide
+`--chain-key-file /absolute/path/to/backup.json`. The worker selects only keys
+matching the deployed role addresses. Credential files, transaction journals and
+financial recovery records are excluded from Git. Never put signing keys in the
+browser. RPC/address overrides are process environment variables; see
+[server instructions](server/README.md).
+
+For a free practice session, omit `--chain` and choose **Latihan tanpa dana**.
+Open `http://localhost:8080/?input=bluetooth` for a pistol or `?input=touch` for
+screen controls. Android localhost testing can use `adb reverse tcp:8080 tcp:8080`
+for each connected phone; use HTTPS for a remote deployment.
+
+In Mises, enable an Ethereum-compatible browser wallet. Connect and sign in on
+Monad Testnet, create/join a room, deposit **1 test USDC** per player, register each
+player's own selfie, and press **Siap Duel**. The camera recognizes the opponent
+automatically during play. No separate opponent-photo or manual target step is
+required. Wallet popups, Bluetooth support, and camera behavior still need to be
+checked on the actual browser/device combination.
+
+Countdown waits for finalized onchain funding and start. Resolution allocates
+credits; a separate claim sends tokens. The UI reports payment only after the
+arena payment event and matching token transfer are finalized. Timeout refunds
+use the deployed contract deadlines. Match/payment jobs persist locally so a
+server restart can reconcile receipts and recover funds.
+
+Face matching and client camera evidence are probabilistic and can be forged by
+a modified client. This prototype is not an independently audited real-money
+competition. Gameplay currently implements Duel 1v1; the deployed contract also
+supports Team Duel and Rumble.
 
 ## Testnet deployment
 

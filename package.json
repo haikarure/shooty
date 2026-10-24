@@ -1,0 +1,11 @@
+{
+  "name": "shooty-game",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:wallet": "node tools/build-wallet.mjs",
+    "test:chain": "node --test tests/chain-worker.test.mjs"
+  },
+  "dependencies": { "ethers": "6.17.0" },
+  "devDependencies": { "esbuild": "0.28.2" }
+}

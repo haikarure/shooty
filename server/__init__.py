@@ -1,0 +1,1 @@
+"""Shooty local multiplayer services."""

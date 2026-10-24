@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#0e091c">
+    <title>Shooty — Quickdraw Arena</title>
+    <link rel="icon" href="data:,">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="/web/style.css">
+    <script defer src="/web/game-core.js"></script>
+    <script defer src="/web/audio.js"></script>
+    <script defer src="/web/duel-client.js"></script>
+    <script defer src="/web/vision-client.js"></script>
+    <script defer src="/web/wallet-client.js"></script>
+    <script defer src="/web/app.js"></script>
+</head>
+<body data-mode="touch" data-active="false" data-started="false">
+    <section id="start-screen" aria-labelledby="start-title">
+        <div class="start-content">
+            <span class="eyebrow">QUICKDRAW / MONAD BLITZ</span>
+            <svg class="start-mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M32 12H12v20m52-20h20v20M12 64v20h20m52-20v20H64"/><circle cx="48" cy="48" r="5"/></svg>
+            <h1 id="start-title">Shooty.</h1>
+            <p class="start-tagline">Bidik. Tarik pelatuk.</p>
+            <button id="start-shooty" class="button primary" type="button">MULAI <span aria-hidden="true">↗</span></button>
+            <span class="start-caption">Landscape · Pistol & touch</span>
+            <p id="start-status" role="status">Tap Mulai untuk membuka layar penuh.</p>
+        </div>
+    </section>
+    <main id="arena" aria-label="Arena latihan Shooty" inert>
+        <video id="camera-feed" autoplay playsinline muted></video>
+        <canvas id="vision-overlay" aria-hidden="true"></canvas>
+        <div class="scene-shade"></div>
+        <div id="camera-placeholder"><span class="eyebrow">SHOOTY / QUICKDRAW</span><p>Arena lu ada di depan mata.</p><span>Aktifkan kamera di pengaturan untuk mulai membidik.</span></div>
+        <header class="arena-top">
+            <div class="connection-chip"><span id="status-indicator" class="status-dot"></span><span id="status-text">TOUCH SIAP</span></div>
+            <div class="practice-chip"><span class="live-dot"></span> <span id="session-kind">LATIHAN</span> <span class="divider">/</span> <span id="session-status">PERSIAPAN</span></div>
+            <div class="arena-tools">
+                <button id="fullscreen" class="icon-button" type="button" aria-label="Masuk fullscreen" title="Fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+                <button id="open-settings" class="icon-button" type="button" aria-label="Buka pengaturan" title="Pengaturan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16M8 3v6m8 0v6M9 15v6"/></svg></button>
+            </div>
+        </header>
+        <div id="duel-hud" hidden><span id="duel-code"></span><span id="duel-self"></span><span id="duel-opponent"></span></div>
+        <div id="health-hud" hidden><div><span>LU <strong id="self-health-value">100 HP</strong></span><i><b id="self-health-fill"></b></i></div><div><span>LAWAN <strong id="opponent-health-value">100 HP</strong></span><i><b id="opponent-health-fill"></b></i></div></div>
+        <div id="tracking-status" hidden></div>
+        <div id="duel-overlay" hidden><strong id="duel-countdown"></strong><span id="duel-caption"></span></div>
+        <div id="crosshair" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+        <div id="muzzle-flash" aria-hidden="true"></div>
+        <div id="hit-banner" role="status" aria-live="polite"></div>
+        <div class="scene-note"><span id="target-stat">DETEKSI TARGET BELUM AKTIF</span></div>
+        <div id="rotate-hint">Miringkan HP untuk ruang bidik yang lebih luas.</div>
+        <footer class="arena-bottom">
+            <section class="ammo-panel" aria-label="Amunisi">
+                <div class="ammo-label"><span>MAGASIN</span><span id="ammo-state">SIAP</span></div>
+                <div class="ammo-value"><span id="ammo-count">30</span><span class="ammo-capacity">/ 30</span></div>
+                <div class="ammo-track"><span id="ammo-fill"></span></div>
+                <div id="reload-progress" role="progressbar" aria-label="Proses reload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><span></span></div>
+                <span id="reload-hint">RELOAD DI LAYAR</span>
+            </section>
+            <div class="arena-feedback"><span id="last-event" role="status">Siapkan perangkat, lalu masuk latihan.</span><span id="audio-badge">SUARA BELUM AKTIF</span></div>
+            <div class="combat-controls">
+                <button id="reload" type="button" aria-label="Reload magasin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5"/></svg><span>RELOAD</span></button>
+                <button id="touch-fire" type="button" aria-label="Tembak"><span class="fire-symbol">+</span><span>TEMBAK</span></button>
+            </div>
+        </footer>
+    </main>
+    <dialog id="settings" aria-labelledby="settings-title">
+        <form method="dialog" class="settings-shell" id="settings-form">
+            <header class="settings-header"><div><span class="eyebrow">SHOOTY / DEVICE CHECK</span><h1 id="settings-title">Siap buat quickdraw?</h1></div><button id="close-settings" class="icon-button" type="button" aria-label="Tutup pengaturan">×</button></header>
+            <p class="settings-intro">Siapkan perangkat untuk latihan, atau undang lawan ke room Duel 1v1.</p>
+            <div class="display-status-row"><span id="display-status" role="status"></span><button id="retry-landscape" class="small-button" type="button" hidden>Landscape ↗</button></div>
+            <div class="setup-grid">
+                <section class="setup-card">
+                    <div class="card-heading"><span class="step-number">01</span><h2>Controller</h2></div>
+                    <div class="segmented" role="group" aria-label="Pilih input"><button type="button" id="mode-gun" aria-pressed="false">PISTOL</button><button type="button" id="mode-touch" aria-pressed="true">TOUCH</button></div>
+                    <p id="bridge-status">Input tombol layar siap.</p>
+                    <button type="button" class="button secondary" id="connect-gun">Hubungkan pistol</button>
+                    <span class="fine-print">Pilih ARGunGame di daftar Bluetooth.</span>
+                </section>
+                <section class="setup-card">
+                    <div class="card-heading"><span class="step-number">02</span><h2>Kamera & suara</h2></div>
+                    <div class="setup-actions"><button type="button" class="button secondary" id="start-camera">Aktifkan kamera</button><button type="button" class="button secondary" id="test-audio">Tes tembakan</button><button type="button" class="button secondary" id="test-reload">Tes reload</button></div>
+                    <p id="camera-status">Kamera belum aktif.</p>
+                    <div class="volume-row"><label for="volume">Volume <output id="volume-label">45%</output></label><input id="volume" type="range" min="0" max="100" value="45" aria-label="Volume efek suara"><button id="mute" class="small-button" type="button" aria-pressed="false">Mute</button></div>
+                    <p id="audio-status">Tap Tes tembakan atau Tes reload, lalu cek volume media HP.</p>
+                </section>
+                <section class="setup-card bindings-card">
+                    <div class="card-heading"><span class="step-number">03</span><h2>Tombol pistol</h2></div>
+                    <p>Atur tombol yang nyaman. Pelatuk tetap untuk menembak.</p>
+                    <div id="binding-rows"></div>
+                    <div id="learning-panel" hidden><strong id="learning-title"></strong><p id="learning-instruction" aria-live="polite"></p><button type="button" id="cancel-learning" class="small-button">Batal</button></div>
+                    <p id="binding-feedback" aria-live="polite">Hubungkan pistol untuk mengatur tombol.</p>
+                    <label class="check-row"><input id="show-touch" type="checkbox"> Tampilkan tombol tembak layar saat pakai pistol</label>
+                </section>
+
+                <section class="setup-card room-card">
+                    <div class="card-heading"><span class="step-number">04</span><h2>Duel 1v1</h2><span id="duel-network">Belum tersambung</span><button id="reconnect-duel" type="button" class="small-button" hidden>Sambungkan server</button></div>
+                    <p>Duel kamera: 100 HP, body hit 25, headshot 50. Pilih latihan atau entry 1 test USDC di Monad Testnet.</p>
+                    <div class="wallet-panel"><label for="wallet-provider">Wallet browser</label><select id="wallet-provider" aria-label="Pilih wallet browser"></select><button id="connect-wallet" class="button secondary" type="button">Hubungkan & sign in</button><p id="wallet-status" role="status">Buka di Mises dengan wallet aktif untuk duel test USDC.</p><p id="wallet-balance"></p><button id="recover-payments" class="small-button" type="button" disabled>Cek hadiah / refund sebelumnya</button><div id="recovery-list"></div></div>
+                    <div id="room-admission">
+                        <label for="player-name">Nama pemain</label><input id="player-name" maxlength="18" placeholder="Nama lu" autocomplete="nickname">
+                        <label for="duel-rules">Mode room</label><select id="duel-rules"><option value="VISION">Duel kamera · 100 HP</option><option value="INPUT">Uji input · tanpa damage</option></select>
+                        <label for="room-payment">Entry</label><select id="room-payment"><option value="NONE">Latihan tanpa dana</option><option value="TEST_USDC">Duel · 1 test USDC per pemain</option></select>
+                        <div class="room-actions"><button id="create-room" type="button" class="button secondary">Buat room</button><label class="sr-only" for="room-code-input">Kode room</label><input id="room-code-input" maxlength="6" placeholder="KODE ROOM" autocapitalize="characters" autocomplete="off" spellcheck="false"><button id="join-room" type="button" class="button secondary">Gabung</button></div>
+                    </div>
+                    <div id="room-lobby" hidden>
+                        <div class="room-heading"><span>ROOM <strong id="room-code-value"></strong></span><button id="copy-room" type="button" class="small-button">Salin undangan</button><button id="leave-room" type="button" class="small-button">Keluar room</button></div>
+                        <div id="room-roster"></div>
+                    </div>
+                    <p id="room-feedback" role="status">Buat room atau masukkan kode dari lawan.</p>
+                    <div id="funding-panel" hidden><p class="funding-price"><strong>ENTRY 1 TEST USDC</strong><span>Pool 2 · hadiah pemenang 1,8 · fee 0,2 test USDC</span></p><p id="funding-status" role="status"></p><div class="setup-actions"><button id="deposit-entry" class="button primary" type="button">BAYAR 1 TEST USDC</button><button id="claim-credit" class="button secondary" type="button" hidden>Klaim hadiah / refund</button><button id="expire-match" class="small-button" type="button" hidden>Ajukan refund timeout</button></div><a id="wallet-transaction" target="_blank" rel="noopener noreferrer" hidden>Lihat transaksi</a></div>
+                </section>
+                <section class="setup-card vision-card">
+                    <div class="card-heading"><span class="step-number">05</span><h2>Selfie & lawan otomatis</h2></div>
+                    <p>Daftarkan selfie masing-masing, lalu main dengan kamera belakang. Wajah lawan dikenali dari room yang sama.</p>
+                    <div class="setup-actions"><button id="open-selfie" class="button secondary" type="button">Daftar selfie</button><button id="start-vision" class="button secondary" type="button">Aktifkan kamera game</button></div>
+                    <p id="vision-status" role="status">Masuk room, lalu ambil selfie diri sendiri. Foto badan terpisah tidak diperlukan.</p>
+                </section>
+            </div>
+            <div id="setup-message" role="status" aria-live="polite"></div>
+            <footer class="settings-footer"><span id="setup-footer-note">Kamera opsional untuk uji kontrol. Deteksi target belum aktif.</span><button class="button primary" id="enter-arena" type="button">MASUK LATIHAN <span aria-hidden="true">↗</span></button></footer>
+        </form>
+    </dialog>
+    <dialog id="selfie-dialog" aria-labelledby="selfie-title">
+        <div class="selfie-layout">
+            <div class="selfie-preview"><video id="selfie-feed" autoplay playsinline muted aria-label="Pratinjau selfie"></video><span class="selfie-guide" aria-hidden="true"></span></div>
+            <div class="selfie-copy"><span class="eyebrow">PERSIAPAN PEMAIN</span><h2 id="selfie-title">Kenalin diri lu.</h2><p>Posisikan wajah lu di tengah bingkai dan cari cahaya yang terang.</p><p id="selfie-saved" hidden>Selfie sebelumnya sudah tersimpan. Lu bisa langsung main.</p><p class="selfie-privacy">Foto diproses di server game. Referensi wajah hanya di memori dan dihapus saat room selesai.</p><p id="selfie-status" role="status">Menyiapkan kamera depan…</p><div class="setup-actions"><button id="take-selfie" class="button primary" type="button" disabled>SIMPAN SELFIE</button><button id="cancel-selfie" class="button secondary" type="button">Batal</button></div></div>
+        </div>
+    </dialog>
+    <noscript>Aktifkan JavaScript untuk menghubungkan controller dan menjalankan latihan.</noscript>
+</body>
+</html>
