@@ -1,0 +1,59 @@
+{
+  "recorded_at": "2026-10-23T15:32:43.709075+00:00",
+  "scope": "Blueprint, interface, Solidity payout mathematics, and local UI simulation",
+  "contract_checks": {
+    "command": "forge test --use /home/haikaru/.local/bin/solc --json",
+    "foundry_version": "1.7.1",
+    "solc_version": "0.8.36",
+    "openzeppelin_contracts_version": "5.6.1",
+    "evm_target": "cancun",
+    "status": "passed",
+    "passed_tests": [
+      "testDuelAmounts",
+      "testTeamAmounts",
+      "testRumbleAmounts",
+      "testAllValidRefundMasksConserveDeposits",
+      "testPartialTeamLobbyRefundsOnlyFiveDeposits",
+      "testDrawReturnsWholePool",
+      "testFuzzPoolConservation",
+      "testRejectsUnknownMode",
+      "testRejectsDepositsOutsideRoster"
+    ],
+    "test_count": 9,
+    "fuzz_runs": 256,
+    "compiler_warnings_after_final_run": [],
+    "notice": "Observed successful local run. No implemented escrow, signature validation, live payout, or Monad gas benchmark is covered."
+  },
+  "mcp": {
+    "endpoint": "https://mcp.openzeppelin.com/contracts/solidity/mcp",
+    "server_version": "0.7.2",
+    "called_tools": [
+      "solidity-custom",
+      "solidity-erc20"
+    ],
+    "unmodified_source_sha256": {
+      "ShootyArenaBase.sol": "bd774d4fedc19614195642493ac2117db6fa704d7d335d6bed646fc725d04fd2",
+      "ShootyLocalTestToken.sol": "0144a33e7326b07fd2c1939d12a214a40226a258f4e1fd77244fb75600790771"
+    },
+    "local_server_started": false,
+    "connection_closed": true,
+    "configuration_modified": false
+  },
+  "ui": {
+    "verification_file": "preview-verification.json",
+    "passed_check_count": 20,
+    "browser_errors": 0,
+    "external_requests": 0,
+    "browser_closed": true,
+    "viewports_checked": [
+      360,
+      390,
+      768,
+      1440
+    ]
+  },
+  "chain_writes": false,
+  "wallets_created": false,
+  "services_left_running": false,
+  "application_source_files_changed": false
+}

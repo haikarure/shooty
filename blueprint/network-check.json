@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-23T14:57:47.371988+00:00",
+  "endpoint": "https://testnet-rpc.monad.xyz",
+  "chainId": 10143,
+  "tokenAddress": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "codeBytes": 1798,
+  "bytecodeSha256": "a6b1fdd7505bfec89cbc6c3d03025d0e921c6005fb413c1b2437ff7b85da9f3b",
+  "decimals": 6,
+  "symbol": "USDC",
+  "rawMetadataResponses": [
+    {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": "0x279f"
+    },
+    {
+      "jsonrpc": "2.0",
+      "result": "0x0000000000000000000000000000000000000000000000000000000000000006",
+      "id": 3
+    },
+    {
+      "jsonrpc": "2.0",
+      "result": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000045553444300000000000000000000000000000000000000000000000000000000",
+      "id": 4
+    }
+  ],
+  "notice": "Read-only token metadata/code presence check, not an issuer or proxy implementation audit."
+}

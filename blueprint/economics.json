@@ -1,0 +1,16 @@
+{
+  "chainId": 10143,
+  "tokenAddress": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "tokenSymbol": "USDC",
+  "tokenDecimals": 6,
+  "entryUnits": 1000000,
+  "feeBps": 1000,
+  "basisPointsDenominator": 10000,
+  "modes": {
+    "DUEL": { "id": 0, "players": 2, "winners": 1, "poolUnits": 2000000, "feeUnits": 200000, "perWinnerUnits": 1800000 },
+    "TEAM_DUEL": { "id": 1, "players": 6, "winners": 3, "poolUnits": 6000000, "feeUnits": 600000, "perWinnerUnits": 1800000 },
+    "RUMBLE": { "id": 2, "players": 4, "winners": 1, "poolUnits": 4000000, "feeUnits": 400000, "perWinnerUnits": 3600000 }
+  },
+  "drawAndTimeoutFeeBps": 0,
+  "notice": "Testnet planning constants. Rumble size and Team Duel per-player entry are working assumptions. No fiat redemption value."
+}

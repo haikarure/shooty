@@ -1,0 +1,18 @@
+title = "Shooty public source secret scanning"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Exact public Circle testnet token address and original MCP source checksum"
+regexTarget = "secret"
+regexes = [
+  '''(?i)^0x534b2f3a21130d7a60830c2df862319e593943a3$''',
+  '''^0144a33e7326b07fd2c1939d12a214a40226a258f4e1fd77244fb75600790771$''',
+]
+
+[[rules]]
+id = "evm-private-key-assignment"
+description = "Literal EVM private keys assigned to signing key fields"
+regex = '''(?i)(?:["']?(?:private[_-]?key|deployer[_-]?key|referee[_-]?key|relayer[_-]?key|admin[_-]?key)["']?)\s*[:=]\s*["']?(0x[0-9a-f]{64}|[0-9a-f]{64})\b'''
+secretGroup = 1

@@ -1,0 +1,186 @@
+{
+  "checkedAt": "2026-10-24T06:00:50.868Z",
+  "target": {
+    "network": "Monad Testnet",
+    "chainId": 10143
+  },
+  "status": "DEPLOYED_FINALIZED_AND_EXPLORER_VERIFIED",
+  "toolchain": {
+    "foundry": "1.8.1",
+    "solc": "0.8.37+commit.f401782d",
+    "node": "24.20.0",
+    "openzeppelin": "5.6.1",
+    "evm": "cancun",
+    "viaIR": true,
+    "optimizerRuns": 200
+  },
+  "forge": {
+    "command": "forge test --use /home/pupulion/.local/bin/solc --no-match-contract ShootyArenaGasTest --json",
+    "reportedChecks": 58,
+    "failed": 0,
+    "suites": {
+      "test/PayoutMath.t.sol:PayoutMathTest": {
+        "checks": 9,
+        "passed": 9,
+        "failed": 0
+      },
+      "test/ShootyArena.invariant.t.sol:ShootyArenaInvariantTest": {
+        "checks": 1,
+        "passed": 1,
+        "failed": 0,
+        "invariants": {
+          "runs": 128,
+          "calls": 8192,
+          "reverts": 0
+        },
+        "predicates": [
+          {
+            "name": "invariantAllDepositsRemainLockedCreditedOrPaid",
+            "status": "Success"
+          },
+          {
+            "name": "invariantTerminalMatchesHaveNoLockedFunds",
+            "status": "Success"
+          }
+        ]
+      },
+      "test/ShootyArena.t.sol:ShootyArenaTest": {
+        "checks": 48,
+        "passed": 48,
+        "failed": 0
+      }
+    }
+  },
+  "integration": {
+    "command": "FOUNDRY_SOLC=/home/pupulion/.local/bin/solc npm run test:integration",
+    "tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "scope": [
+      "typed signatures",
+      "deployment preparation",
+      "source verification bundle",
+      "wallet provisioning",
+      "CreateX preflight, wrong chain, insufficient balance and failed simulation",
+      "unavailable RPC prevents private-key loading",
+      "post-submit timeout resumes one saved transaction"
+    ]
+  },
+  "format": {
+    "status": "passed",
+    "scope": "implementation source and new Solidity tests"
+  },
+  "bytecode": {
+    "runtimeBytes": 11023,
+    "creationBytes": 13303
+  },
+  "originalHandoff": {
+    "embeddedFiles": 25,
+    "allEmbeddedHashesVerified": true,
+    "sha256": "d13228f9f34a95c9d6d52dba8cc8055a51e1bfedfab25bccaca1913ec27d54fd"
+  },
+  "liveRPC": {
+    "status": "validated_by_host_deployment_script",
+    "source": "deployment/testnet.json",
+    "freshAgentRpcCheck": false
+  },
+  "deployment": {
+    "broadcast": true,
+    "status": "FINALIZED",
+    "contractAddress": "0xb2877AcE468df80B6e137776d0A60D7ec4431BaF",
+    "transactionHash": "0x80405ee1a8adecdfa3dda13f54c4946d0ee518507315124a2bcc4b941da3e63f",
+    "receiptStatus": "0x1",
+    "blockNumber": 73732324,
+    "record": "deployment/testnet.json",
+    "createXEventAndPredictionMatched": true,
+    "verifiedRolesAndToken": true,
+    "explorerVerification": {
+      "monadvision": {
+        "status": "success",
+        "message": "Verified with perfect match",
+        "url": "https://testnet.monadvision.com/address/0xb2877AcE468df80B6e137776d0A60D7ec4431BaF"
+      },
+      "monadscan": {
+        "status": "success",
+        "message": "Pass - Verified",
+        "guid": "un5v5iplp4nqjgpg7enfug8hsm4wywapbzebrrfeawnqmxk7ra",
+        "url": "https://testnet.monadscan.com/address/0xb2877AcE468df80B6e137776d0A60D7ec4431BaF"
+      }
+    }
+  },
+  "limitations": [
+    "Local EVM gas figures are not Monad gas measurements",
+    "No external security audit",
+    "Game server, wallet/BLE, and relayer are not integrated in this workspace",
+    "The per-match referee is trusted to determine game outcomes"
+  ],
+  "sha256": {
+    "contracts/src/ShootyArena.sol": "b3a17923ed4b9f6dfbda037c04e63fa81623bcae77597ef52bfdaa713c349730",
+    "contracts/src/IShootyArena.sol": "23ccbeef4fb228a71616606c0d7ee78b5422fc6dc6fa51749e1c7c8666de6ac6",
+    "contracts/src/PayoutMath.sol": "068866dddd3ebdb73bd68ad0216ada87e76ef823709aa0af44dafacc6363f104",
+    "contracts/foundry.toml": "9acd9aef5186f17e8371598392806d63f94466b3d45ea367e8d253ceb66e962b",
+    "contracts/package-lock.json": "eedcb535d7d7d9a980b1cf6a0d9083f0e1e5434fa7fbb568158f3939c6be78e4",
+    "contracts/abi/ShootyArena.json": "1e84c0bf041c7c0f70e90f02e8ffc639ac81f04f77302657988cacbd5671a88f",
+    "contracts/integration/authorizations.mjs": "09b494db9f98faf88b75506ea40f67ec9c1c445ff46a436ff242de89045c1768",
+    "contracts/test/ShootyArena.t.sol": "11e96e24a3558f1c145edbc4a18812c94f6ca9ec3697e7bbb89e6fbc09b664c1",
+    "contracts/test/ShootyArena.invariant.t.sol": "7b73fb042ee2159878ab046c398ef78bf54e936095142e5325843a6cdc5edc47",
+    "contracts/test/helpers/TestBase.sol": "d49a2586fe6ed60409c637d1a4afae76236b07db2d155fd037f3f485beb0b86f",
+    "contracts/test/integration.test.mjs": "80c1c22eb196328a7a19249488ff47ea9241b2bfd790c7d70c767abb106ab76a",
+    "contracts/tools/prepare-deployment.mjs": "a2c6a0fea7df76822faa963682228b5a4811c5c0903f6353b6765e746d866285",
+    "contracts/test/ShootyArena.gas.t.sol": "0e72ebcd41d3cce2d128f8fdf6450cb1f25a857f7069614ace37889a8dad4557",
+    "contracts/tools/compare-gas.py": "e3825991f758c04c94e1a3502e7468e5830b46474cc77985abaae5cc4cdf4fd5",
+    "contracts/benchmarks/gas-baseline.json": "b6cae870aaa652a0c7ee7a8a6f42459c2f08ff5f0d7cfeaa7e2c67f80fd20f2b",
+    "contracts/benchmarks/gas-optimized.json": "e5adda7f59897b322913bf2b6a6820a19a132b0cf0d4f8350bd3d19f5610a52e",
+    "contracts/benchmarks/gas-comparison.json": "0af78f292eb45dc38c6b10c0ada2bf20c81b1706d2c8de550ae5c2ead842da98",
+    "contracts/benchmarks/gas-variants.json": "27001abb84652b3ec44ad8a6c36109f3a855ac57da72f6f614eba1224d9abc17",
+    "contracts/benchmarks/optimization.patch": "4ebcba6e6a4ccdaa426ed38d97c2cbbbca13f4311326146bc9312925525f14a2",
+    "contracts/GAS_OPTIMIZATION.md": "8b7dcda558121bcccc5a2c6b162be52607276d44c437ce4a886c9d12fc926fbe",
+    "contracts/tools/export-verification.mjs": "d9cfe7ab8b90bf1265b1098effa6a32973d9ef62f978d71af5f104a0a01eae06",
+    "contracts/test/verification-export.test.mjs": "54d860f5f13ca778711f8f954c107d924d40302eab47f8f43a5b482317b3bdb4",
+    "contracts/package.json": "2f9283dd0d11385c8221023fee37a647b22107ca26afdaaed9ff4a0f5f4470ab",
+    "contracts/tools/create-demo-wallets.mjs": "4d788d6864be8c3c8e51a6dd359e940bf82bb86a804be4b49f98aab6e9902e4c",
+    "contracts/test/wallet-provisioning.test.mjs": "2d5f846d0805d28763ce9c37caecdc8250be687a5b6bfa58fae6ce04b92ff5eb",
+    "contracts/WALLETS.md": "a3d4ac7ef4cbeb763b8a0609114337f1de294b28f032383392802d624c44d6d7",
+    "contracts/deployment/wallets.public.json": "69de19bd4d0e8d36186a321505c16b5d837d20ce8c9567ca39dd3e80e1c6b8a4",
+    "contracts/tools/deploy-testnet.mjs": "566a6fac5bf8875c9d00c99871d31cc642bdafdaaf63c7c293437292f2bb3797",
+    "contracts/test/deployment.test.mjs": "31e34a119e0dbbb88a1e63512163a363f798d7d35836de58a4b8efcf062110f8",
+    "contracts/DEPLOYMENT.md": "cb93c390037c4cc934e5d0981cf24ee74b040ffb08f30cd5241d3893542c72da",
+    "contracts/deployment/testnet.json": "df36ca2f46ca2316b3dda1eb943d2c3049abc25bcccfa0639ff218bae31bebed",
+    "contracts/deployment/addresses.json": "0e5b681e76d14c8102d926c0c7776e1d3ef54cc929d2e85a145632f5e826fe48"
+  },
+  "gasOptimization": {
+    "command": "forge test --use /home/pupulion/.local/bin/solc --isolate --match-contract ShootyArenaGasTest --json",
+    "checksPassed": 5,
+    "snapshotCount": 31,
+    "baselineAndOptimizedRepeatedIdentically": true,
+    "report": "benchmarks/gas-comparison.json",
+    "abiChange": "MatchCreated.mode is indexed; other event formats and all functions unchanged",
+    "schedule": "local Cancun; not a Monad gas quote"
+  },
+  "explorerVerificationBundle": {
+    "sourceCount": 31,
+    "creationAndRuntimeBytecodeReproduced": true,
+    "path": "deployment/verification",
+    "broadcast": false,
+    "contractAddress": null
+  },
+  "walletProvisioning": {
+    "walletCount": 8,
+    "intendedNetwork": "Monad Testnet",
+    "chainId": 10143,
+    "generator": "Foundry cast 1.8.1, local random EVM keys",
+    "keyAddressVerification": "Node/OpenSSL secp256k1 public key plus Keccak address matches",
+    "publicManifest": "deployment/wallets.public.json",
+    "backupFile": "../.secrets/shooty-monad-testnet/wallets.json",
+    "backupMode": "0600",
+    "secretDirectoryMode": "0700",
+    "rawKeysInPublicArtifacts": false,
+    "fundingStatus": "not_checked",
+    "broadcast": false
+  },
+  "previousAgentRpcAttempt": {
+    "status": "failed",
+    "reason": "EAI_AGAIN: Temporary failure in name resolution",
+    "checkedAt": "2026-10-24T05:32:27.454Z"
+  }
+}

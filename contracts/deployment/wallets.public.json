@@ -1,0 +1,34 @@
+{
+  "formatVersion": 1,
+  "network": "Monad Testnet",
+  "chainId": 10143,
+  "createdAt": "2026-10-24T05:03:20.503Z",
+  "fundingStatus": "not_checked",
+  "broadcast": false,
+  "wallets": {
+    "deployer": {
+      "address": "0xBE693fb07aFa2Bb559C6c9e328F0C60D1d3154A7"
+    },
+    "admin": {
+      "address": "0x29453115eAfF12Eeae0930ae069876ad3d28E3b9"
+    },
+    "relayer": {
+      "address": "0x1505B74b2E5C1240BB45C469afB274596D508f1d"
+    },
+    "pauser": {
+      "address": "0x31F93eA541EB0F572dF03bC0d2D6e9Ad132ca3BB"
+    },
+    "referee": {
+      "address": "0x2d9Fe0F10920B15E03B8B76a1316556afeEB8b19"
+    },
+    "treasury": {
+      "address": "0x90803001C8323B38f56ddCDB5ef9A87EEAf27C19"
+    },
+    "player_one": {
+      "address": "0x4f3ea479BC1A6242cF112C068F76bB491d7A4076"
+    },
+    "player_two": {
+      "address": "0x003262df09C7de222FfB1A6c221dD8620bD8119E"
+    }
+  }
+}

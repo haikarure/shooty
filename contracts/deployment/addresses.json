@@ -1,0 +1,28 @@
+{
+  "chainId": 10143,
+  "network": "Monad Testnet",
+  "arena": "0xb2877AcE468df80B6e137776d0A60D7ec4431BaF",
+  "rewardToken": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "createX": "0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+  "transactionHash": "0x80405ee1a8adecdfa3dda13f54c4946d0ee518507315124a2bcc4b941da3e63f",
+  "blockNumber": 73732324,
+  "status": "FINALIZED",
+  "roles": {
+    "admin": "0x29453115eAfF12Eeae0930ae069876ad3d28E3b9",
+    "creator": "0x1505B74b2E5C1240BB45C469afB274596D508f1d",
+    "pauser": "0x31F93eA541EB0F572dF03bC0d2D6e9Ad132ca3BB",
+    "referee": "0x2d9Fe0F10920B15E03B8B76a1316556afeEB8b19",
+    "feeRecipient": "0x90803001C8323B38f56ddCDB5ef9A87EEAf27C19"
+  },
+  "explorers": {
+    "monadvision": {
+      "status": "success",
+      "url": "https://testnet.monadvision.com/address/0xb2877AcE468df80B6e137776d0A60D7ec4431BaF"
+    },
+    "monadscan": {
+      "status": "success",
+      "url": "https://testnet.monadscan.com/address/0xb2877AcE468df80B6e137776d0A60D7ec4431BaF"
+    }
+  },
+  "evidence": "Local deployment receipt and verifier response produced by the host deployment script"
+}

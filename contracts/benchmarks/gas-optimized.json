@@ -1,0 +1,53 @@
+{
+  "environment": {
+    "foundry": "1.8.1",
+    "solc": "0.8.37+commit.f401782d",
+    "evm": "cancun",
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "isolate": true,
+    "token": "local adversarial TestToken, normal transfer mode",
+    "metric": "callee execution gas; excludes intrinsic transaction gas and test setup",
+    "network": "local EVM, not live Monad"
+  },
+  "sourceSha256": {
+    "src/ShootyArena.sol": "b3a17923ed4b9f6dfbda037c04e63fa81623bcae77597ef52bfdaa713c349730",
+    "src/IShootyArena.sol": "23ccbeef4fb228a71616606c0d7ee78b5422fc6dc6fa51749e1c7c8666de6ac6",
+    "src/PayoutMath.sol": "068866dddd3ebdb73bd68ad0216ada87e76ef823709aa0af44dafacc6363f104"
+  },
+  "operationGas": {
+    "Duel/claim_0": 81645,
+    "Duel/claim_fee": 72057,
+    "Duel/create": 262780,
+    "Duel/join_0": 156813,
+    "Duel/join_1": 95287,
+    "Duel/resolve": 105556,
+    "Duel/start": 53229,
+    "Refund/team_expire_five_deposits": 170675,
+    "Rumble/claim_0": 81645,
+    "Rumble/claim_fee": 72057,
+    "Rumble/create": 313205,
+    "Rumble/join_0": 156813,
+    "Rumble/join_1": 90836,
+    "Rumble/join_2": 93259,
+    "Rumble/join_3": 100133,
+    "Rumble/resolve": 105613,
+    "Rumble/start": 53229,
+    "Refund/team_draw": 211871,
+    "Team/claim_0": 81645,
+    "Team/claim_1": 64557,
+    "Team/claim_2": 64557,
+    "Team/claim_fee": 72057,
+    "Team/create": 366418,
+    "Team/join_0": 156813,
+    "Team/join_1": 90836,
+    "Team/join_2": 93259,
+    "Team/join_3": 95682,
+    "Team/join_4": 98105,
+    "Team/join_5": 104979,
+    "Team/resolve": 158851,
+    "Team/start": 53229
+  },
+  "baselineAndCandidateRepeatedIdentically": true,
+  "harnessSha256": "0e72ebcd41d3cce2d128f8fdf6450cb1f25a857f7069614ace37889a8dad4557"
+}

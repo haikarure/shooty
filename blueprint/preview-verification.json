@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-23T15:30:07.155723+00:00",
+  "browser_executable": "/home/haikaru/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+  "checks": [
+    "Embedded frontend economics match the canonical JSON",
+    "DUEL: login, approval, deposit, game, credit, payout, and fresh rematch",
+    "DUEL/win: simulated credit and payment amounts consistent",
+    "DUEL/lose: simulated credit and payment amounts consistent",
+    "DUEL/draw: simulated credit and payment amounts consistent",
+    "DUEL/timeout: simulated credit and payment amounts consistent",
+    "TEAM_DUEL: login, approval, deposit, game, credit, payout, and fresh rematch",
+    "TEAM_DUEL/win: simulated credit and payment amounts consistent",
+    "TEAM_DUEL/lose: simulated credit and payment amounts consistent",
+    "TEAM_DUEL/draw: simulated credit and payment amounts consistent",
+    "TEAM_DUEL/timeout: simulated credit and payment amounts consistent",
+    "RUMBLE: login, approval, deposit, game, credit, payout, and fresh rematch",
+    "RUMBLE/win: simulated credit and payment amounts consistent",
+    "RUMBLE/lose: simulated credit and payment amounts consistent",
+    "RUMBLE/draw: simulated credit and payment amounts consistent",
+    "RUMBLE/timeout: simulated credit and payment amounts consistent",
+    "No document overflow at 360px for key screens in all modes",
+    "No document overflow at 390px for key screens in all modes",
+    "No document overflow at 768px for key screens in all modes",
+    "No document overflow at 1440px for key screens in all modes"
+  ],
+  "browser_errors": [],
+  "external_http_requests": [],
+  "notice": "Local UI simulation checks only; no live wallet, BLE, escrow, or chain settlement tested.",
+  "browser_closed": true
+}

@@ -1,0 +1,177 @@
+{
+  "metric": "isolated callee execution gas, Cancun EVM",
+  "operations": {
+    "Duel/claim_0": {
+      "before": 81645,
+      "after": 81645,
+      "saved": 0
+    },
+    "Duel/claim_fee": {
+      "before": 72057,
+      "after": 72057,
+      "saved": 0
+    },
+    "Duel/create": {
+      "before": 262728,
+      "after": 262780,
+      "saved": -52
+    },
+    "Duel/join_0": {
+      "before": 157004,
+      "after": 156813,
+      "saved": 191
+    },
+    "Duel/join_1": {
+      "before": 95630,
+      "after": 95287,
+      "saved": 343
+    },
+    "Duel/resolve": {
+      "before": 105556,
+      "after": 105556,
+      "saved": 0
+    },
+    "Duel/start": {
+      "before": 53229,
+      "after": 53229,
+      "saved": 0
+    },
+    "Refund/team_draw": {
+      "before": 213221,
+      "after": 211871,
+      "saved": 1350
+    },
+    "Refund/team_expire_five_deposits": {
+      "before": 172045,
+      "after": 170675,
+      "saved": 1370
+    },
+    "Rumble/claim_0": {
+      "before": 81645,
+      "after": 81645,
+      "saved": 0
+    },
+    "Rumble/claim_fee": {
+      "before": 72057,
+      "after": 72057,
+      "saved": 0
+    },
+    "Rumble/create": {
+      "before": 313153,
+      "after": 313205,
+      "saved": -52
+    },
+    "Rumble/join_0": {
+      "before": 157004,
+      "after": 156813,
+      "saved": 191
+    },
+    "Rumble/join_1": {
+      "before": 91079,
+      "after": 90836,
+      "saved": 243
+    },
+    "Rumble/join_2": {
+      "before": 93554,
+      "after": 93259,
+      "saved": 295
+    },
+    "Rumble/join_3": {
+      "before": 100580,
+      "after": 100133,
+      "saved": 447
+    },
+    "Rumble/resolve": {
+      "before": 105613,
+      "after": 105613,
+      "saved": 0
+    },
+    "Rumble/start": {
+      "before": 53229,
+      "after": 53229,
+      "saved": 0
+    },
+    "Team/claim_0": {
+      "before": 81645,
+      "after": 81645,
+      "saved": 0
+    },
+    "Team/claim_1": {
+      "before": 64557,
+      "after": 64557,
+      "saved": 0
+    },
+    "Team/claim_2": {
+      "before": 64557,
+      "after": 64557,
+      "saved": 0
+    },
+    "Team/claim_fee": {
+      "before": 72057,
+      "after": 72057,
+      "saved": 0
+    },
+    "Team/create": {
+      "before": 366367,
+      "after": 366418,
+      "saved": -51
+    },
+    "Team/join_0": {
+      "before": 157004,
+      "after": 156813,
+      "saved": 191
+    },
+    "Team/join_1": {
+      "before": 91079,
+      "after": 90836,
+      "saved": 243
+    },
+    "Team/join_2": {
+      "before": 93554,
+      "after": 93259,
+      "saved": 295
+    },
+    "Team/join_3": {
+      "before": 96029,
+      "after": 95682,
+      "saved": 347
+    },
+    "Team/join_4": {
+      "before": 98504,
+      "after": 98105,
+      "saved": 399
+    },
+    "Team/join_5": {
+      "before": 105530,
+      "after": 104979,
+      "saved": 551
+    },
+    "Team/resolve": {
+      "before": 158851,
+      "after": 158851,
+      "saved": 0
+    },
+    "Team/start": {
+      "before": 53229,
+      "after": 53229,
+      "saved": 0
+    }
+  },
+  "lifecycles": {
+    "Duel": {
+      "before": 827849,
+      "after": 827367,
+      "saved": 482
+    },
+    "Team": {
+      "before": 1502963,
+      "after": 1500988,
+      "saved": 1975
+    },
+    "Rumble": {
+      "before": 1067914,
+      "after": 1066790,
+      "saved": 1124
+    }
+  }
+}

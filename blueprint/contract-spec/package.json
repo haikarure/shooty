@@ -1,0 +1,9 @@
+{
+  "name": "shooty-contract-blueprint",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Compileable interface and payout math for the Shooty blueprint; no escrow implementation or deployment",
+  "dependencies": {
+    "@openzeppelin/contracts": "5.6.1"
+  }
+}

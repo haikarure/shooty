@@ -1,0 +1,50 @@
+{
+  "endpoint": "https://mcp.openzeppelin.com/contracts/solidity/mcp",
+  "server": {
+    "name": "OpenZeppelin Solidity Contracts MCP Server",
+    "version": "0.7.2"
+  },
+  "called_at": "2026-10-23T14:50:24.229105+00:00",
+  "request": {
+    "name": "solidity-erc20",
+    "arguments": {
+      "name": "ShootyLocalTestToken",
+      "symbol": "LOCALUSD",
+      "decimals": "6",
+      "premint": "10000",
+      "mintable": true,
+      "access": "roles",
+      "permit": false,
+      "info": {
+        "license": "MIT"
+      }
+    }
+  },
+  "response": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "```solidity\n// SPDX-License-Identifier: MIT\n// Compatible with OpenZeppelin Contracts ^5.7.0\npragma solidity ^0.8.27;\n\nimport {AccessControl} from \"@openzeppelin/contracts/access/AccessControl.sol\";\nimport {ERC20} from \"@openzeppelin/contracts/token/ERC20/ERC20.sol\";\n\ncontract ShootyLocalTestToken is ERC20, AccessControl {\n    bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\");\n\n    constructor(address recipient, address defaultAdmin, address minter)\n        ERC20(\"ShootyLocalTestToken\", \"LOCALUSD\")\n    {\n        _mint(recipient, 10000 * 10 ** decimals());\n        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);\n        _grantRole(MINTER_ROLE, minter);\n    }\n\n    function decimals() public pure override returns (uint8) {\n        return 6;\n    }\n\n    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {\n        _mint(to, amount);\n    }\n}\n\n```\n"
+        }
+      ],
+      "structuredContent": {
+        "opts": {
+          "name": "ShootyLocalTestToken",
+          "symbol": "LOCALUSD",
+          "decimals": "6",
+          "premint": "10000",
+          "mintable": true,
+          "permit": false,
+          "access": "roles",
+          "info": {
+            "license": "MIT"
+          }
+        },
+        "code": "// SPDX-License-Identifier: MIT\n// Compatible with OpenZeppelin Contracts ^5.7.0\npragma solidity ^0.8.27;\n\nimport {AccessControl} from \"@openzeppelin/contracts/access/AccessControl.sol\";\nimport {ERC20} from \"@openzeppelin/contracts/token/ERC20/ERC20.sol\";\n\ncontract ShootyLocalTestToken is ERC20, AccessControl {\n    bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\");\n\n    constructor(address recipient, address defaultAdmin, address minter)\n        ERC20(\"ShootyLocalTestToken\", \"LOCALUSD\")\n    {\n        _mint(recipient, 10000 * 10 ** decimals());\n        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);\n        _grantRole(MINTER_ROLE, minter);\n    }\n\n    function decimals() public pure override returns (uint8) {\n        return 6;\n    }\n\n    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {\n        _mint(to, amount);\n    }\n}\n"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 3
+  }
+}

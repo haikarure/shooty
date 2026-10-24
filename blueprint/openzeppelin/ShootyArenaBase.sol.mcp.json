@@ -1,0 +1,42 @@
+{
+  "endpoint": "https://mcp.openzeppelin.com/contracts/solidity/mcp",
+  "server": {
+    "name": "OpenZeppelin Solidity Contracts MCP Server",
+    "version": "0.7.2"
+  },
+  "called_at": "2026-10-23T14:50:23.344866+00:00",
+  "request": {
+    "name": "solidity-custom",
+    "arguments": {
+      "name": "ShootyArenaBase",
+      "pausable": true,
+      "access": "roles",
+      "info": {
+        "license": "MIT"
+      }
+    }
+  },
+  "response": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "```solidity\n// SPDX-License-Identifier: MIT\n// Compatible with OpenZeppelin Contracts ^5.7.0\npragma solidity ^0.8.27;\n\nimport {AccessControl} from \"@openzeppelin/contracts/access/AccessControl.sol\";\nimport {Pausable} from \"@openzeppelin/contracts/utils/Pausable.sol\";\n\ncontract ShootyArenaBase is Pausable, AccessControl {\n    bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\");\n\n    constructor(address defaultAdmin, address pauser) {\n        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);\n        _grantRole(PAUSER_ROLE, pauser);\n    }\n\n    function pause() public onlyRole(PAUSER_ROLE) {\n        _pause();\n    }\n\n    function unpause() public onlyRole(PAUSER_ROLE) {\n        _unpause();\n    }\n}\n\n```\n"
+        }
+      ],
+      "structuredContent": {
+        "opts": {
+          "name": "ShootyArenaBase",
+          "pausable": true,
+          "access": "roles",
+          "info": {
+            "license": "MIT"
+          }
+        },
+        "code": "// SPDX-License-Identifier: MIT\n// Compatible with OpenZeppelin Contracts ^5.7.0\npragma solidity ^0.8.27;\n\nimport {AccessControl} from \"@openzeppelin/contracts/access/AccessControl.sol\";\nimport {Pausable} from \"@openzeppelin/contracts/utils/Pausable.sol\";\n\ncontract ShootyArenaBase is Pausable, AccessControl {\n    bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\");\n\n    constructor(address defaultAdmin, address pauser) {\n        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);\n        _grantRole(PAUSER_ROLE, pauser);\n    }\n\n    function pause() public onlyRole(PAUSER_ROLE) {\n        _pause();\n    }\n\n    function unpause() public onlyRole(PAUSER_ROLE) {\n        _unpause();\n    }\n}\n"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 2
+  }
+}

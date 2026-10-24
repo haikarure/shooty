@@ -1,0 +1,83 @@
+--- src/ShootyArena.sol
++++ src/ShootyArena.sol
+@@ -121,11 +121,15 @@
+         if (block.timestamp > data.joinDeadline) revert DeadlinePassed();
+         if (expectedTermsHash != data.termsHash) revert TermsMismatch();
+ 
+-        uint8 slot = _participantSlot(record.roster, msg.sender);
++        uint256 rosterLength = record.roster.length;
++        uint8 slot = _participantSlot(record.roster, msg.sender, rosterLength);
+         uint8 bit = uint8(1) << slot;
+-        if (data.depositMask & bit != 0) revert AlreadyDeposited();
+-        data.depositMask |= bit;
+-        data.locked += ENTRY;
++        uint8 depositMask = data.depositMask;
++        if (depositMask & bit != 0) revert AlreadyDeposited();
++        depositMask |= bit;
++        data.depositMask = depositMask;
++        uint256 locked = data.locked + ENTRY;
++        data.locked = locked;
+         totalDeposited[matchId] += ENTRY;
+         totalLiability += ENTRY;
+ 
+@@ -135,9 +139,10 @@
+         uint256 afterBalance = token.balanceOf(address(this));
+         if (afterBalance < beforeBalance || afterBalance - beforeBalance != ENTRY) revert InvalidTokenTransfer();
+         emit PlayerDeposited(matchId, msg.sender, slot, ENTRY);
+-        if (data.depositMask == uint8((uint256(1) << record.roster.length) - 1)) {
++        // Roster, mask and locked amount cannot change during the guarded token call.
++        if (depositMask == uint8((uint256(1) << rosterLength) - 1)) {
+             data.state = State.FUNDED;
+-            emit MatchFunded(matchId, data.locked);
++            emit MatchFunded(matchId, locked);
+         }
+     }
+ 
+@@ -290,9 +295,17 @@
+         if (record.data.state == State.NONE) revert UnknownMatch();
+     }
+ 
+-    function _participantSlot(address[] storage roster, address participant) private view returns (uint8) {
+-        for (uint8 i; i < roster.length; ++i) {
++    function _participantSlot(address[] storage roster, address participant, uint256 count)
++        private
++        view
++        returns (uint8)
++    {
++        for (uint8 i; i < count;) {
+             if (roster[i] == participant) return i;
++            // Roster creation limits this loop to at most six participants.
++            unchecked {
++                ++i;
++            }
+         }
+         revert NotParticipant();
+     }
+@@ -303,8 +316,14 @@
+     }
+ 
+     function _refund(bytes32 matchId, MatchRecord storage record) private {
+-        for (uint8 i; i < record.roster.length; ++i) {
+-            if (record.data.depositMask & (uint8(1) << i) != 0) _credit(matchId, record.roster[i], ENTRY);
++        uint256 count = record.roster.length;
++        uint8 depositMask = record.data.depositMask;
++        for (uint8 i; i < count;) {
++            if (depositMask & (uint8(1) << i) != 0) _credit(matchId, record.roster[i], ENTRY);
++            // Only the bounded counter is unchecked; credit arithmetic stays checked.
++            unchecked {
++                ++i;
++            }
+         }
+     }
+ 
+--- src/IShootyArena.sol
++++ src/IShootyArena.sol
+@@ -62,7 +62,7 @@
+         uint256 locked;
+     }
+ 
+-    event MatchCreated(bytes32 indexed matchId, Mode mode, bytes32 termsHash, bytes32 rosterHash);
++    event MatchCreated(bytes32 indexed matchId, Mode indexed mode, bytes32 termsHash, bytes32 rosterHash);
+     event PlayerDeposited(bytes32 indexed matchId, address indexed player, uint8 slot, uint256 amount);
+     event MatchFunded(bytes32 indexed matchId, uint256 pool);
+     event MatchStarted(bytes32 indexed matchId, uint64 resultDeadline);
