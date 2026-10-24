@@ -6,7 +6,7 @@ The extracted starter remains unchanged in `../blueprint/contract-spec/`. MCP fi
 
 ## Build and check
 
-Requirements: Node.js 22+, Foundry, and Solidity **0.8.37**. OpenZeppelin Contracts is pinned to **5.6.1** with its original npm integrity checksum. Compiler settings: optimization with 200 runs, via IR, Cancun.
+Requirements: Node.js 24+, Foundry, and Solidity **0.8.37**. OpenZeppelin Contracts is pinned to **5.6.1** with its original npm integrity checksum. Compiler settings: optimization with 200 runs, via IR, Cancun.
 
 ```sh
 cd contracts
