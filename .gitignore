@@ -35,3 +35,5 @@ contracts/deployment/attempt.json
 *.log
 *.swp
 .DS_Store
+/dist/
+/.vercel/

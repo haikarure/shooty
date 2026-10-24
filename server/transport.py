@@ -4,6 +4,7 @@ import asyncio
 from contextlib import asynccontextmanager, suppress
 from http import HTTPStatus
 import json
+import os
 from urllib.parse import urlsplit
 
 from websockets.asyncio.server import serve
@@ -21,6 +22,7 @@ class Application:
         self.peers = {}
         self.lock = asyncio.Lock()
         self.vision = None
+        self.allowed_origins = {value.strip().rstrip('/') for value in os.environ.get('SHOOTY_ALLOWED_ORIGINS', '').split(',') if value.strip()}
         from .chain_service import ChainService
         self.chain = ChainService(self,enabled=chain,settings=chain_settings)
 
@@ -32,7 +34,7 @@ class Application:
             origin = request.headers.get("Origin")
             if origin:
                 parsed = urlsplit(origin)
-                if parsed.scheme not in ("http", "https") or parsed.netloc != request.headers.get("Host"):
+                if parsed.scheme not in ("http", "https") or (parsed.netloc != request.headers.get("Host") and origin not in self.allowed_origins):
                     return connection.respond(HTTPStatus.FORBIDDEN, "Origin rejected\n")
             return None
         entry = self.files.get(path)

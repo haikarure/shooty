@@ -54,6 +54,20 @@ a modified client. This prototype is not an independently audited real-money
 competition. Gameplay currently implements Duel 1v1; the deployed contract also
 supports Team Duel and Rumble.
 
+### Vercel frontend
+
+`npm run build:web` creates `dist/` from an explicit list of public game assets.
+The repository's `vercel.json` deploys that directory. Set the build environment
+variable `SHOOTY_BACKEND_URL` to the HTTPS origin of the running game server.
+Without it, local builds use the page's own origin. Models, signing keys,
+financial journals and backend source are not copied into the public directory.
+
+On the backend, set `SHOOTY_ALLOWED_ORIGINS` to the exact frontend origin
+(comma-separated if needed), then start the Python service with `--chain`.
+Keep one authoritative backend process and its persistent financial files
+running for the demo. The current in-memory room service is not migrated into
+Vercel Functions by this frontend configuration.
+
 ## Testnet deployment
 
 | Item | Details |

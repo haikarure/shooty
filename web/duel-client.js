@@ -26,7 +26,7 @@
                 this.resolveConnection = resolve; this.rejectConnection = reject;
             });
             const result = this.connectionPromise;
-            const url = new URL('/ws/duel', location.href); url.protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const url = new URL('/ws/duel', window.SHOOTY_CONFIG?.backendUrl || location.href); url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
             const socket = new WebSocket(url); this.socket = socket;
             this.handshakeTimer = setTimeout(() => socket.close(), 10000);
             socket.onopen = () => this.raw({ type: 'HELLO', token: this.token });

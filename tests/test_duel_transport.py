@@ -70,6 +70,16 @@ class TransportTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(a.close_code, 1008)
         self.assertTrue(self.application.arena.players[sa["token"]].connected)
 
+    async def test_explicit_deployment_origin_allowed_other_origins_rejected(self):
+        self.application.allowed_origins = {'https://shooty.example'}
+        async with connect(self.url, origin='https://shooty.example') as peer:
+            await peer.send(json.dumps({'type': 'HELLO'}))
+            self.assertTrue((await self.until(peer, 'SESSION'))['playerId'])
+        with self.assertRaises(InvalidStatus) as error:
+            async with connect(self.url, origin='https://shooty.example.attacker.invalid'):
+                pass
+        self.assertEqual(error.exception.response.status_code, 403)
+
     async def test_http_allowlist_origin_and_malformed_message(self):
         def read(path):
             with urllib.request.urlopen(self.origin+path, timeout=2) as response:

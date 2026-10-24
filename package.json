@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build:wallet": "node tools/build-wallet.mjs",
+    "build:web": "npm run build:wallet && node tools/build-web.mjs",
     "test:chain": "node --test tests/chain-worker.test.mjs"
   },
   "dependencies": { "ethers": "6.17.0" },

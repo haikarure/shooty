@@ -17,7 +17,7 @@
             try {
                 await this.session.connect();
                 if (!this.enabled) return;
-                const url = new URL('/ws/vision', location.href); url.protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+                const url = new URL('/ws/vision', window.SHOOTY_CONFIG?.backendUrl || location.href); url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
                 const socket = new WebSocket(url); socket.binaryType = 'arraybuffer'; this.socket = socket;
                 socket.onopen = () => socket.send(JSON.stringify({ type: 'HELLO', token: this.session.token }));
                 socket.onmessage = event => { if (this.socket === socket) this.receive(event.data); };

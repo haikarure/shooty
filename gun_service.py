@@ -41,6 +41,7 @@ WEB_FILES = {
     "/web/audio/pistol-reload-start.wav": ("web/audio/pistol-reload-start.wav", "audio/wav"),
     "/web/audio/pistol-reload-complete.wav": ("web/audio/pistol-reload-complete.wav", "audio/wav"),
     "/web/app.js": ("web/app.js", "text/javascript; charset=utf-8"),
+    "/web/runtime-config.js": ("web/runtime-config.js", "text/javascript; charset=utf-8"),
     "/web/duel-client.js": ("web/duel-client.js", "text/javascript; charset=utf-8"),
     "/web/vision-client.js": ("web/vision-client.js", "text/javascript; charset=utf-8"),
     "/web/wallet-client.js": ("web/wallet-client.js", "text/javascript; charset=utf-8"),

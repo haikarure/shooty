@@ -1,0 +1,16 @@
+.env
+.env.*
+*.env
+.secrets/
+.venv/
+research/
+tests/
+contracts/
+hardware/
+server/
+blueprint/
+web/models/
+node_modules/
+*.py
+*.zip
+dist/
