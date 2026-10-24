@@ -56,6 +56,10 @@ supports Team Duel and Rumble.
 
 ### Vercel frontend
 
+[Open the current demo](https://shooty-omega.vercel.app). The frontend is hosted
+on Vercel; multiplayer, vision and the relayer currently depend on the running
+laptop backend and its temporary HTTPS tunnel. The laptop must stay online.
+
 `npm run build:web` creates `dist/` from an explicit list of public game assets.
 The repository's `vercel.json` deploys that directory. Set the build environment
 variable `SHOOTY_BACKEND_URL` to the HTTPS origin of the running game server.

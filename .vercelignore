@@ -5,7 +5,9 @@
 .venv/
 research/
 tests/
-contracts/
+contracts/*
+!contracts/abi/
+!contracts/integration/
 hardware/
 server/
 blueprint/
